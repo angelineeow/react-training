@@ -1,6 +1,10 @@
 import './App.css';
 import React from 'react'
 import Child from './component/Child';
+import Child2 from './component/Child2';
+
+// virtual dom
+// reconcilation, diffing algorithm
 
 class App extends React.Component {
   constructor(){
@@ -8,7 +12,7 @@ class App extends React.Component {
     console.log("App constructor");
     this.state = {
       hide: false,
-    }
+    };
   }
 
   static getDerivedStateFromProps(props, state){
@@ -31,7 +35,7 @@ class App extends React.Component {
   }
 
   shouldComponentUpdate(){
-    console.log("App shouldComponentUpdate");
+    console.log("Child shouldComponentUpdate");
     return true;
   }
 
@@ -41,6 +45,12 @@ class App extends React.Component {
     });
   }
 
+  // handleTimeChange = () => {
+  //   this.setState({
+  //     time: this.state.time + 100,
+  //   })
+  // }
+
   // every time we call render(), react create element on virtual DOM
   render(){
     console.log("App render");
@@ -49,7 +59,8 @@ class App extends React.Component {
     return (
     <>
       <h1 id="heading"> App </h1>
-      {!this.state.hide && <Child />}
+      {!this.state.hide && (<Child />)}
+      <Child2 />
       <button onClick={this.handleHide}> Hide </button>
     </>
     );
