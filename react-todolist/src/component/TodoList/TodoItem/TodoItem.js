@@ -14,8 +14,7 @@ class TodoItem extends React.Component{
                         type="text" 
                         value={title}
                         onChange= {(e) => {
-                            let newTitle = e.target.value;
-                            onEdit(id, newTitle)
+                            onEdit(id, e.target.value)
                         }}>
                     </input>
                     <button 

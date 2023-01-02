@@ -55,6 +55,41 @@ class TodoList extends React.Component{
         })
     }
 
+    /*
+        virtual DOM: object
+        DOM(document object model): object
+
+        diffing algorithm:
+
+        jsx is a syntax sugar for React.createElement()
+
+        virtual dom/node: console.log("jsx", <div>123</div>);
+        dom node: console.log("js", React.createElement("div", null, "123"));
+
+        dom node: children
+        dom: tree, root parent
+
+        console.log("root", document.querySelectorAll("#root")) // shows all the node
+    
+        state:
+        [
+            {},
+            {},
+            {}
+        ]
+
+        lifecycle:
+        1. change of state or props
+        2. trigger the render cycle, shouldComponentUpdate, render, componentDidUpdate
+        3. render method create new virtual dom object using the new state or props
+        4. old virtual dom, diffing algorithm, compare old virtual dom with new virtual dom
+        5. update the real dom more efficiently, reconciliation
+        6. componentDidUpdate
+
+        setState update batching
+        setState async
+    */
+
     render(){
         return (
         <section className="todolist">
