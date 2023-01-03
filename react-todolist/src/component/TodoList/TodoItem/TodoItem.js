@@ -3,59 +3,31 @@ import React from "react";
 import "./TodoItem.css"
 
 class TodoItem extends React.Component{
-    render(){
-        let {id, title, isEdit, completed} = this.props.todo;
-        let {onDelete, onEdit} = this.props;
-            if(isEdit && !completed) {
-                // isEdit: true && completed: false (editing task)
 
-                return (<li className="todoitem">
-                    <input 
-                        type="text" 
-                        value={title}
-                        onChange= {(e) => {
-                            onEdit(id, e.target.value)
-                        }}>
-                    </input>
-                    <button 
-                        className="btn btn--edit" 
-                        onClick={(e) => {
-                            isEdit = false;
-                            onEdit(id, title, isEdit)
-                        }}>edit</button>
-                    <button className="btn btn--delete" onClick={() => onDelete(id)}>delete</button>
-                </li>
-            
-            )} else if (!isEdit && completed) {
-                // isEdit: false && completed: true (completed task)
-                
-                return (<li className="todoitem">
-                    {/* check if completed is true or false */}
-                    <span 
-                        onClick={() => {
-                            completed = false;
-                            onEdit(id, title, isEdit, completed)
-                        }} 
-                        style={{textDecoration: "line-through"}}>
-                            {title}
-                    </span>
-                </li>
-            
-            )} else {
-                // isEdit: false && completed: false (just pending task)
-                return (<li className="todoitem">
-                    <span onClick={() => {
-                            completed = true;
-                            onEdit(id, title, isEdit, completed)
-                    }}>{title}</span>
-                    <button className="btn btn--edit" onClick={() => {
-                            isEdit = true;
-                            onEdit(id, title, isEdit)
-                    }}>edit</button>
-                    <button className="btn btn--delete" onClick={() => onDelete(id)}>delete</button>
-                </li>
-                
-            )}
+    //local state
+    state = {
+        value: this.props.todo.title
+    }
+
+    handleChange = (e) => {
+        this.setState({value: e.target.value})
+    }
+
+    render(){
+        const {id, title, isEdit, completed} = this.props.todo;
+        const {onDelete, onEdit, onSave, onComplete} = this.props;
+
+        return (
+            <li className="todoitem">
+              {completed ? <span onClick={() => onComplete(id, completed)} style={{ textDecoration: "line-through" }}> {title} </span> : (
+                <>
+                  {isEdit ? <input type="text" value={this.state.value} onChange={this.handleChange}/> : <span onClick={() => onComplete(id, completed)}>{title}</span>}
+                  {isEdit ? <button className="btn btn--save" onClick={() => onSave(id, this.state.value)}>save</button>:<button className="btn btn--edit" onClick={()=>onEdit(id)}>edit</button>}
+                  <button className="btn btn--delete" onClick={() => onDelete(id)}>delete</button>
+                </>
+              )}
+            </li>
+        );
     }
 }
 

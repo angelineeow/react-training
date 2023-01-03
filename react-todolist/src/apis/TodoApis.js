@@ -15,10 +15,18 @@ const removeTodo = (id) => {
   }).then((res) => res.json());
 };
 
-const editTodo = (id, title, isEdit, completed) => {
+const saveTodo = (id, title) => {
   return fetch(URL + `/${id}`,{
     method: "PATCH",
-    body: JSON.stringify({title, isEdit, completed}),
+    body: JSON.stringify({title}),
+    headers: { "Content-Type": "application/json" },
+  }).then((res) => res.json());
+};
+
+const completeTodo = (id, completed) => {
+  return fetch(URL + `/${id}`,{
+    method: "PATCH",
+    body: JSON.stringify({completed}),
     headers: { "Content-Type": "application/json" },
   }).then((res) => res.json());
 };
@@ -28,4 +36,4 @@ const getTodos = () => {
 };
 
 // we have bundler to help
-export { addTodo, removeTodo, getTodos, editTodo };
+export { addTodo, removeTodo, getTodos, saveTodo, completeTodo };

@@ -21,8 +21,13 @@ code {
 :root {
   --color-primary: lightblue;
   --color-secondary: lightcoral;
+  --color-tertiary: lightgreen;
 
   --height-header: 50px;
+}
+
+span {
+  cursor: pointer;
 }
 
 .btn {
@@ -32,10 +37,14 @@ code {
   cursor: pointer;
 }
 
-.btn--primary {
+.btn--edit {
   background-color: var(--color-primary);
 }
 
 .btn--delete {
   background-color: var(--color-secondary);
+}
+
+.btn--save {
+  background-color: var(--color-tertiary);
 }

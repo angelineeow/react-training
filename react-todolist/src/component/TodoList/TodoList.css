@@ -25,3 +25,9 @@
 .todolist__contentPending .todolist__contentCompleted {
     margin-top: 10px;
 }
+
+ul {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+}
